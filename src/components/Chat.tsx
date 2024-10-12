@@ -78,7 +78,7 @@ export default function Chat(props: {}) {
       );
       return;
     }
-    setOutputCode(' ');
+    setOutputCode('');
     setLoading(true);
     const controller = new AbortController();
     const body: ChatBody = {
@@ -169,7 +169,7 @@ export default function Chat(props: {}) {
           w="100%"
           mx="auto"
           minH="75vh"
-          display={outputCode ? 'flex' : 'none'}
+          display={!!outputCode ? 'flex' : 'none'}
           mb={'auto'}
         >
           <Flex w="100%" align="flex-start" mb="10px">
