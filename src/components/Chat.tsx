@@ -62,10 +62,10 @@ export default function Chat(props: {}) {
     // Chat post conditions(maximum number of characters, valid message etc.)
     const maxCodeLength = model === 'gpt-4o' ? 700 : 700;
 
-    if (!apiKey?.includes('sk-')) {
-      alert('Please enter an API key.');
-      return;
-    }
+    // if (!apiKey?.includes('sk-')) {
+    //   alert('Please enter an API key.');
+    //   return;
+    // }
 
     if (!inputCode) {
       alert('Please enter your message.');
@@ -88,24 +88,22 @@ export default function Chat(props: {}) {
     };
 
     // -------------- Fetch --------------
-    const response = await fetch('./api/chatAPI', {
-      method: 'POST',
+    const response = await fetch(`http://localhost:3000/gptchat?message=${encodeURI(inputCode)}`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      signal: controller.signal,
-      body: JSON.stringify(body),
     });
 
-    if (!response.ok) {
-      setLoading(false);
-      if (response) {
-        alert(
-          'Something went wrong went fetching from the API. Make sure to use a valid API key.',
-        );
-      }
-      return;
-    }
+    // if (!response.ok) {
+    //   setLoading(false);
+    //   if (response) {
+    //     alert(
+    //       'Something went wrong went fetching from the API. Make sure to use a valid API key.',
+    //     );
+    //   }
+    //   return;
+    // }
 
     const data = response.body;
 
@@ -159,14 +157,6 @@ export default function Chat(props: {}) {
       direction="column"
       position="relative"
     >
-      <Img
-        // src={Bg.src}
-        position={'absolute'}
-        w="350px"
-        left="50%"
-        top="50%"
-        transform={'translate(-50%, -50%)'}
-      />
       <Flex
         direction="column"
         mx="auto"
@@ -174,121 +164,15 @@ export default function Chat(props: {}) {
         minH={{ base: '75vh', '2xl': '85vh' }}
         maxW="1000px"
       >
-        {/* Model Change */}
-        <Flex direction={'column'} w="100%" mb={outputCode ? '20px' : 'auto'}>
-          <Flex
-            mx="auto"
-            zIndex="2"
-            w="max-content"
-            mb="20px"
-            borderRadius="60px"
-          >
-            <Flex
-              cursor={'pointer'}
-              transition="0.3s"
-              justify={'center'}
-              align="center"
-              bg={model === 'gpt-4o' ? buttonBg : 'transparent'}
-              w="174px"
-              h="70px"
-              boxShadow={model === 'gpt-4o' ? buttonShadow : 'none'}
-              borderRadius="14px"
-              color={textColor}
-              fontSize="18px"
-              fontWeight={'700'}
-              onClick={() => setModel('gpt-4o')}
-            >
-              <Flex
-                borderRadius="full"
-                justify="center"
-                align="center"
-                bg={bgIcon}
-                me="10px"
-                h="39px"
-                w="39px"
-              >
-                <Icon
-                  as={MdAutoAwesome}
-                  width="20px"
-                  height="20px"
-                  color={iconColor}
-                />
-              </Flex>
-              GPT-4o
-            </Flex>
-            <Flex
-              cursor={'pointer'}
-              transition="0.3s"
-              justify={'center'}
-              align="center"
-              bg={model === 'gpt-3.5-turbo' ? buttonBg : 'transparent'}
-              w="164px"
-              h="70px"
-              boxShadow={model === 'gpt-3.5-turbo' ? buttonShadow : 'none'}
-              borderRadius="14px"
-              color={textColor}
-              fontSize="18px"
-              fontWeight={'700'}
-              onClick={() => setModel('gpt-3.5-turbo')}
-            >
-              <Flex
-                borderRadius="full"
-                justify="center"
-                align="center"
-                bg={bgIcon}
-                me="10px"
-                h="39px"
-                w="39px"
-              >
-                <Icon
-                  as={MdBolt}
-                  width="20px"
-                  height="20px"
-                  color={iconColor}
-                />
-              </Flex>
-              GPT-3.5
-            </Flex>
-          </Flex>
-
-          <Accordion color={gray} allowToggle w="100%" my="0px" mx="auto">
-            <AccordionItem border="none">
-              <AccordionButton
-                borderBottom="0px solid"
-                maxW="max-content"
-                mx="auto"
-                _hover={{ border: '0px solid', bg: 'none' }}
-                _focus={{ border: '0px solid', bg: 'none' }}
-              >
-                <Box flex="1" textAlign="left">
-                  <Text color={gray} fontWeight="500" fontSize="sm">
-                    No plugins added
-                  </Text>
-                </Box>
-                <AccordionIcon color={gray} />
-              </AccordionButton>
-              <AccordionPanel mx="auto" w="max-content" p="0px 0px 10px 0px">
-                <Text
-                  color={gray}
-                  fontWeight="500"
-                  fontSize="sm"
-                  textAlign={'center'}
-                >
-                  This is a cool text example.
-                </Text>
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
-        </Flex>
-        {/* Main Box */}
         <Flex
           direction="column"
           w="100%"
           mx="auto"
+          minH="75vh"
           display={outputCode ? 'flex' : 'none'}
           mb={'auto'}
         >
-          <Flex w="100%" align={'center'} mb="10px">
+          <Flex w="100%" align="flex-start" mb="10px">
             <Flex
               borderRadius="full"
               justify="center"
@@ -298,8 +182,9 @@ export default function Chat(props: {}) {
               borderColor={borderColor}
               me="20px"
               h="40px"
-              minH="40px"
+              // minH="40px"
               minW="40px"
+              mt="22px"
             >
               <Icon
                 as={MdPerson}
@@ -310,9 +195,9 @@ export default function Chat(props: {}) {
             </Flex>
             <Flex
               p="22px"
-              border="1px solid"
-              borderColor={borderColor}
-              borderRadius="14px"
+              // border="1px solid"
+              // borderColor={borderColor}
+              // borderRadius="14px"
               w="100%"
               zIndex={'2'}
             >
@@ -320,18 +205,22 @@ export default function Chat(props: {}) {
                 color={textColor}
                 fontWeight="600"
                 fontSize={{ base: 'sm', md: 'md' }}
+                minH={24}
                 lineHeight={{ base: '24px', md: '26px' }}
+                margin={0}
+                wordBreak="break-all"
+                textAlign="left"
               >
                 {inputOnSubmit}
               </Text>
-              <Icon
+              {/* <Icon
                 cursor="pointer"
                 as={MdEdit}
                 ms="auto"
                 width="20px"
-                height="20px"
+                // height="20px"
                 color={gray}
-              />
+              /> */}
             </Flex>
           </Flex>
           <Flex w="100%">
@@ -362,8 +251,9 @@ export default function Chat(props: {}) {
           justifySelf={'flex-end'}
         >
           <Input
-            minH="54px"
-            h="100%"
+            flex={1}
+            // minH="54px"
+            // h="100%"
             border="1px solid"
             borderColor={borderColor}
             borderRadius="45px"
@@ -399,28 +289,6 @@ export default function Chat(props: {}) {
           >
             Submit
           </Button>
-        </Flex>
-
-        <Flex
-          justify="center"
-          mt="20px"
-          direction={{ base: 'column', md: 'row' }}
-          alignItems="center"
-        >
-          <Text fontSize="xs" textAlign="center" color={gray}>
-            Free Research Preview. ChatGPT may produce inaccurate information
-            about people, places, or facts.
-          </Text>
-          {/* <Link href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes">
-            <Text
-              fontSize="xs"
-              color={textColor}
-              fontWeight="500"
-              textDecoration="underline"
-            >
-              ChatGPT May 12 Version
-            </Text>
-          </Link> */}
         </Flex>
       </Flex>
     </Flex>
