@@ -3,34 +3,26 @@
 
 // import Link from '@/components/link/Link';
 import MessageBoxChat from '@/components/MessageBox';
-import { ChatBody, OpenAIModel } from '@/types/types';
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
   Button,
   Flex,
   Icon,
-  Img,
   Input,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { MdAutoAwesome, MdBolt, MdEdit, MdPerson } from 'react-icons/md';
+import { useState } from 'react';
+import { MdAutoAwesome, MdPerson } from 'react-icons/md';
 // import Bg from '../public/img/chat/bg-image.png';
 
-export default function Chat(props: {}) {
+export default function Chat() {
   // Input States
   const [inputOnSubmit, setInputOnSubmit] = useState<string>('');
   const [inputCode, setInputCode] = useState<string>('');
   // Response message
   const [outputCode, setOutputCode] = useState<string>('');
   // ChatGPT model
-  const [model, setModel] = useState<OpenAIModel>('gpt-4o');
+  // const [model, setModel] = useState<OpenAIModel>('gpt-4o');
   // Loading state
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -38,29 +30,30 @@ export default function Chat(props: {}) {
   // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.200');
   const inputColor = useColorModeValue('navy.700', 'white');
-  const iconColor = useColorModeValue('brand.500', 'white');
-  const bgIcon = useColorModeValue(
-    'linear-gradient(180deg, #FBFBFF 0%, #CACAFF 100%)',
-    'whiteAlpha.200',
-  );
+  // const iconColor = useColorModeValue('brand.500', 'white');
+  // const bgIcon = useColorModeValue(
+  //   'linear-gradient(180deg, #FBFBFF 0%, #CACAFF 100%)',
+  //   'whiteAlpha.200',
+  // );
   const brandColor = useColorModeValue('brand.500', 'white');
-  const buttonBg = useColorModeValue('white', 'whiteAlpha.100');
-  const gray = useColorModeValue('gray.500', 'white');
-  const buttonShadow = useColorModeValue(
-    '14px 27px 45px rgba(112, 144, 176, 0.2)',
-    'none',
-  );
+  // const buttonBg = useColorModeValue('white', 'whiteAlpha.100');
+  // const gray = useColorModeValue('gray.500', 'white');
+  // const buttonShadow = useColorModeValue(
+  //   '14px 27px 45px rgba(112, 144, 176, 0.2)',
+  //   'none',
+  // );
   const textColor = useColorModeValue('navy.700', 'white');
   const placeholderColor = useColorModeValue(
     { color: 'gray.500' },
     { color: 'whiteAlpha.600' },
   );
   const handleTranslate = async () => {
-    let apiKey = localStorage.getItem('apiKey');
+    // let apiKey = localStorage.getItem('apiKey');
     setInputOnSubmit(inputCode);
 
     // Chat post conditions(maximum number of characters, valid message etc.)
-    const maxCodeLength = model === 'gpt-4o' ? 700 : 700;
+    const maxCodeLength = 700;
+    // const maxCodeLength = model === 'gpt-4o' ? 700 : 700;
 
     // if (!apiKey?.includes('sk-')) {
     //   alert('Please enter an API key.');
@@ -80,12 +73,12 @@ export default function Chat(props: {}) {
     }
     setOutputCode('');
     setLoading(true);
-    const controller = new AbortController();
-    const body: ChatBody = {
-      inputCode,
-      model,
-      apiKey,
-    };
+    // const controller = new AbortController();
+    // const body: ChatBody = {
+    //   inputCode,
+    //   model,
+    //   apiKey,
+    // };
 
     // -------------- Fetch --------------
     const response = await fetch(`http://localhost:3000/gptchat?message=${encodeURI(inputCode)}`, {

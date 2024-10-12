@@ -183,7 +183,7 @@ export const inputStyles = {
             _placeholder: { color: 'navy.700' },
           },
         }),
-        authSecondary: (props: any) => ({
+        authSecondary: () => ({
           field: {
             bg: 'transparent',
             border: '1px solid',
@@ -193,7 +193,7 @@ export const inputStyles = {
             _placeholder: { color: 'navy.700' },
           },
         }),
-        search: (props: any) => ({
+        search: () => ({
           field: {
             border: 'none',
             py: '11px',
