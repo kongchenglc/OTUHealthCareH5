@@ -14,6 +14,7 @@ import {
 import { useState } from 'react';
 import { MdAutoAwesome, MdPerson } from 'react-icons/md';
 // import Bg from '../public/img/chat/bg-image.png';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function Chat() {
   // Input States
@@ -81,7 +82,7 @@ export default function Chat() {
     // };
 
     // -------------- Fetch --------------
-    const response = await fetch(`http://localhost:3000/gptchat?message=${encodeURI(inputCode)}`, {
+    const response = await fetch(`${apiBaseUrl}/chat?message=${encodeURI(inputCode)}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

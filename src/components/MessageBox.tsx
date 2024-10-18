@@ -1,13 +1,24 @@
 import ReactMarkdown from 'react-markdown'
 import { useColorModeValue } from '@chakra-ui/react'
 import Card from '@/components/card/Card'
+import { useMemo } from 'react'
 
 export default function MessageBox(props: { output: string }) {
-  const { output } = props
+  const { output = '{}' } = props
+  const displayContext = useMemo(() => {
+    let result = ''
+    try {
+      result = JSON.parse(output)?.response ?? ''
+    } catch (e) {
+      console.error(e)
+      result = ''
+    }
+    return result
+  }, [output])
   const textColor = useColorModeValue('navy.700', 'white')
   return (
     <Card
-      display={output ? 'flex' : 'none'}
+      display={displayContext ? 'flex' : 'none'}
       px="22px !important"
       pl="22px !important"
       color={textColor}
@@ -17,7 +28,7 @@ export default function MessageBox(props: { output: string }) {
       fontWeight="500"
     >
       <ReactMarkdown className="font-medium">
-        {output ? output : ''}
+        {displayContext ? displayContext : ''}
       </ReactMarkdown>
     </Card>
   )
