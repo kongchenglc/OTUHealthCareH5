@@ -17,15 +17,18 @@ jobs:
     - name: Build
       run: npm install && npm run clean && npm run build
 
-    - name: Deploy to AWS S3
-      uses: jakejarvis/s3-sync-action@v0.5.1
-      with:
-        args: --acl public-read --delete
+    - name: Install AWS CLI
+      run: |
+        pip install awscli
+
+    - name: Deploy to S3
+      run: |
+        aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET }} --delete
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-2'
-        AWS_S3_BUCKET: 'otu-healthcare-h5'
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
 
     # - name: Invalidate CloudFront Cache
     #   if: ${{ always() }}
