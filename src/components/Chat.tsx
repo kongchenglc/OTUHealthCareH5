@@ -88,23 +88,19 @@ export default function Chat() {
       headers: {
         'Content-Type': 'application/json',
       },
+    }).catch((e) => {
+      setLoading(false);
+      console.error(e)
+      return;
     });
 
-    // if (!response.ok) {
-    //   setLoading(false);
-    //   if (response) {
-    //     alert(
-    //       'Something went wrong went fetching from the API. Make sure to use a valid API key.',
-    //     );
-    //   }
-    //   return;
-    // }
-
-    const data = response.body;
+    const data = response?.body;
 
     if (!data) {
       setLoading(false);
-      alert('Something went wrong');
+      alert(
+        'Something went wrong went fetching from the API. Make sure to use a valid API key.',
+      );
       return;
     }
 
