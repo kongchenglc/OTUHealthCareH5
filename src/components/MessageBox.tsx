@@ -11,12 +11,13 @@ export default function MessageBox(props: { output: string }) {
       px="22px !important"
       pl="22px !important"
       color={textColor}
-      // minH="450px"
+      maxWidth='57vw'
       fontSize={{ base: 'sm', md: 'md' }}
       lineHeight={{ base: '24px', md: '26px' }}
       fontWeight="500"
+      textAlign="left"
     >
-      <ReactMarkdown className="font-medium">
+      <ReactMarkdown className="font-small">
         {output ?? ''}
       </ReactMarkdown>
     </Card>

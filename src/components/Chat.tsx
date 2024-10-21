@@ -141,6 +141,12 @@ export default function Chat() {
     setInputCode(Event.target.value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleTranslate();
+    }
+  };
+
   return (
     <Flex
       w="100%"
@@ -257,6 +263,7 @@ export default function Chat() {
             _placeholder={placeholderColor}
             placeholder="Type your message here..."
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
           />
           <Button
             variant="primary"
