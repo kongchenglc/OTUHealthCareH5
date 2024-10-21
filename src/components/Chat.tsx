@@ -26,6 +26,7 @@ export default function Chat() {
   // const [model, setModel] = useState<OpenAIModel>('gpt-4o');
   // Loading state
   const [loading, setLoading] = useState<boolean>(false);
+  const searchParams = new URLSearchParams(window.location.search);
 
   // API Key
   // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
@@ -82,7 +83,7 @@ export default function Chat() {
     // };
 
     // -------------- Fetch --------------
-    const response = await fetch(`${apiBaseUrl}/chat?message=${encodeURI(inputCode)}`, {
+    const response = await fetch(`${apiBaseUrl}/chat?message=${encodeURI(inputCode)}&email=${searchParams?.get('email') ?? ''}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
