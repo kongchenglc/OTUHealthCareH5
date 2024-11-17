@@ -1,0 +1,51 @@
+/* HealthLife.css */
+.healthlife-container {
+    padding: 0 1rem;
+    text-align: left;
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: center;
+    //   align-items: center;
+    //   width: 100%;
+    //   height: 100vh;
+    //   padding: 0;
+    //   box-sizing: border-box;
+    //   overflow-y: auto;
+    // background-color: #f0f0f5;
+    // font-family: Arial, sans-serif;
+}
+
+// .healthlife-container h1,
+// .healthlife-container h2,
+// .healthlife-container p,
+// .healthlife-container ul,
+// .healthlife-container blockquote {
+//   max-width: 600px;
+//   width: 100%;
+//   margin: 0 auto;
+// }
+
+// .healthlife-container h1 {
+//   font-size: 1.8em;
+//   color: #333;
+// }
+
+// .healthlife-container h2 {
+//   font-size: 1.4em;
+//   color: #555;
+// }
+
+// .healthlife-container p,
+// .healthlife-container li {
+//   font-size: 1em;
+//   color: #666;
+//   line-height: 1.6;
+// }
+
+// .healthlife-container blockquote {
+//   font-style: italic;
+//   color: #999;
+//   padding: 10px 20px;
+//   border-left: 4px solid #ccc;
+//   margin: 20px 0;
+// }

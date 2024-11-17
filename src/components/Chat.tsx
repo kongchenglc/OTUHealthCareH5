@@ -117,6 +117,7 @@ export default function Chat() {
     }
 
     setLoading(false);
+    setInputCode('');
   };
   // -------------- Copy Response --------------
   // const copyToClipboard = (text: string) => {
@@ -248,6 +249,7 @@ export default function Chat() {
           justifySelf={'flex-end'}
         >
           <Input
+            value={inputCode}
             flex={1}
             // minH="54px"
             // h="100%"
