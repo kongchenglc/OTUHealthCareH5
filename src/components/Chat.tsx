@@ -96,8 +96,8 @@ export default function Chat() {
 
     const data = response?.body;
 
+    setLoading(false);
     if (!data) {
-      setLoading(false);
       alert(
         'Something went wrong went fetching from the API. Make sure to use a valid API key.',
       );
@@ -109,14 +109,12 @@ export default function Chat() {
     let done = false;
 
     while (!done) {
-      setLoading(true);
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
       setOutputCode((prevCode) => prevCode + chunkValue);
     }
 
-    setLoading(false);
     setInputCode('');
   };
   // -------------- Copy Response --------------
